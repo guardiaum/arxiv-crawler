@@ -31,7 +31,7 @@ class ArxivSpider(scrapy.Spider):
              'subjects': subjects,
              'abstract': abstract}
             
-            if abstract :
+            if abstract:
 		    fileName = title[0].replace('\n', '').replace('/', '')
 		    file = open('output/' + fileName.encode('utf-8') + '.txt', 'w')
 		    file.write('Title: ')
