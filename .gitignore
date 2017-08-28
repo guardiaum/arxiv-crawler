@@ -99,3 +99,10 @@ ENV/
 
 # mypy
 .mypy_cache/
+bin/
+include/
+local/
+pip-selfcheck.json
+share/
+
+arxiv-scraper/output/*
