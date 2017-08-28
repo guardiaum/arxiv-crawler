@@ -30,45 +30,46 @@ class ArxivSpider(scrapy.Spider):
              'journal-ref': journal_ref,
              'subjects': subjects,
              'abstract': abstract}
-             
-            fileName = title[0].replace('\n', '').replace('/', '')
-            file = open('output/' + fileName.encode('utf-8') + '.txt', 'w')
-            file.write('Title: ')
-            file.write(title[0].encode('utf-8'))
-            file.write('\nAuthors: ')
-            for authorsX in authors:
-                for author in authorsX:
-                    file.write(author.encode('utf-8') + ', ')
-                file.write('\n')
-                
-            file.write('\nComments: ')
-            for commentsX in comments:
-                if commentsX:
-                    for comment in commentsX:
-                        file.write(comment.encode('utf-8'))
-                else:
-                    file.write('NA')
-                    file.write('\n')
-                    
-            file.write('\nJournal-ref: ')
-            for journal_refX in journal_ref:
-                if journal_refX:
-                    for journal_ref in journal_refX:
-                        file.write(journal_ref.encode('utf-8'))
-                else:
-                    file.write('NA')
-                    file.write('\n')
             
-            file.write('\n')
-            for subjectsX in subjects:
-                for subject in subjectsX:
-                    file.write(subject.encode('utf-8'))
-                    
-            file.write('\nAbstract:')
-            if abstract:
-                for a in abstract:
-                    file.write(a.encode('utf-8'))
-            else:
-                file.write('NA')
-                
-            file.close()
+            if abstract :
+		    fileName = title[0].replace('\n', '').replace('/', '')
+		    file = open('output/' + fileName.encode('utf-8') + '.txt', 'w')
+		    file.write('Title: ')
+		    file.write(title[0].encode('utf-8'))
+		    file.write('\nAuthors: ')
+		    for authorsX in authors:
+		        for author in authorsX:
+		            file.write(author.encode('utf-8') + ', ')
+		        file.write('\n')
+		        
+		    file.write('\nComments: ')
+		    for commentsX in comments:
+		        if commentsX:
+		            for comment in commentsX:
+		                file.write(comment.encode('utf-8'))
+		        else:
+		            file.write('NA')
+		            file.write('\n')
+		            
+		    file.write('\nJournal-ref: ')
+		    for journal_refX in journal_ref:
+		        if journal_refX:
+		            for journal_ref in journal_refX:
+		                file.write(journal_ref.encode('utf-8'))
+		        else:
+		            file.write('NA')
+		            file.write('\n')
+		    
+		    file.write('\n')
+		    for subjectsX in subjects:
+		        for subject in subjectsX:
+		            file.write(subject.encode('utf-8'))
+		            
+		    file.write('\nAbstract:')
+		    if abstract:
+		        for a in abstract:
+		            file.write(a.encode('utf-8'))
+		    else:
+		        file.write('NA')
+		        
+		    file.close()
