@@ -106,3 +106,4 @@ pip-selfcheck.json
 share/
 
 arxiv-scraper/output/*
+!arxiv-scraper/output/.gitkeep
