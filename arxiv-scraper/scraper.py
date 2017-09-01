@@ -1,13 +1,19 @@
 # 2017.08.28 00:05:39 BRT
 #Embedded file name: /home/jms5/eclipse-workspace/arxiv-crawler/arxiv-scraper/scraper.py
+import os
 import scrapy
 
 class ArxivSpider(scrapy.Spider):
     name = 'arxiv_spider'
-    start_urls = ['https://arxiv.org/list/cs/new']
-
+    codes = ['cs.LG', 'cs.DS', 'cs.IR', 'cs.NE']
+    
+    start_urls = []
+    for code in codes:
+    	start_urls.append('https://arxiv.org/list/%s/new' % code)
+    	
     def parse(self, response):
         META_SELECTOR = '.meta'
+        start_url = response.request.url
         
         for arxiv in response.css(META_SELECTOR):
             TITLE_SELECTOR = '.list-title ::text'
@@ -32,8 +38,14 @@ class ArxivSpider(scrapy.Spider):
              'abstract': abstract}
             
             if abstract :
+            	    cuttedUrl = start_url.split('/')
+            	    folderName = cuttedUrl[4]
+            	    directory = 'output/' + folderName + '/'
+            	    if not os.path.exists(directory):
+			    os.makedirs(directory)
+			    
 		    fileName = title[0].replace('\n', '').replace('/', '')
-		    file = open('output/' + fileName.encode('utf-8') + '.txt', 'w')
+		    file = open(directory + fileName.encode('utf-8') + '.txt', 'w')
 		    file.write('Title: ')
 		    file.write(title[0].encode('utf-8'))
 		    file.write('\nAuthors: ')
